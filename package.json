@@ -1,0 +1,22 @@
+{
+    "name": "slugmaster",
+    "version": "1.2.3",
+    "description": "Slugmaster generates slugs and Coupon codes in a flash",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+      "dist", 
+      "LICENSE", 
+      "README.md"
+    ],
+    "keywords": ["slug", "slug generator", "coupon generator", "slugmaster"],
+    "scripts": {
+      "build": "tsc",
+      "prepare": "npm run build"
+    },
+    "type": "module",
+    "devDependencies": {
+      "@types/node": "^22.4.0",
+      "typescript": "^5.5.4"
+    }
+}
