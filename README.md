@@ -11,7 +11,7 @@ npm install slugmaster
 ```
 
 ## Usage
-### Generate Slug from random set of Words (generateSlug)
+### 1. Generate Slug from random set of Words (generateSlug)
 ```js
 import { generateSlug } from 'slugmaster';
 const slug = generateSlug({
@@ -21,14 +21,13 @@ const slug = generateSlug({
 
 ```js
 const customWordSlug = generateSlug({
-  wordCount: 4,                        // Number of words in the slug (default: 3)
-  wordSet: ["tech", "code", "learn", "build", "scale", "launch"], // Custom word array
-  randomStringLength: 4                // Optional random string appended to the slug (default: 0)
+  wordCount: 4,                        
+  wordSet: ["tech", "code", "learn", "build", "scale", "launch"], 
 });
 ```
 
 -------------------------------------
-### Generate slug from a sentence (slugify)
+### 2. Generate slug from a sentence (slugify)
 ```js
 import { slugify } from 'slugmaster';
 
@@ -43,7 +42,7 @@ const sentenceSlug = slugify("A blog title! to be converted to SLUG.", {
 // output: A-blog-title-to-be-converted-to-SLUG
 ```
 -------------------------------------
-### Generate Coupon codes
+### 3. Generate Coupon codes
 ```js
 import { generateCouponCode } from 'slugmaster';
 const couponCode = generateCouponCode({
