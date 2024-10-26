@@ -13,6 +13,13 @@ npm install slugmaster
 ## USE
 
 ```js
+import { generateSlug } from 'slugmaster';
+const slug = generateSlug({
+  wordCount: 3
+});
+```
+
+```js
 import { generateCouponCode } from 'slugmaster';
 const couponCode = generateCouponCode({
   length: 10,
@@ -20,13 +27,6 @@ const couponCode = generateCouponCode({
   type: 'alphanumeric',
   includeLowercase: true,
   includeSymbols: false
-});
-```
-
-```js
-import { generateSlug } from 'slugmaster';
-const slug = generateSlug({
-  wordCount: 3
 });
 ```
 
@@ -44,3 +44,7 @@ const slug = generateSlug({
 
 - `wordCount`: Number of words in the slug (default: 3)
 - `randomStringLength`: Length of the random string to append (default: 0)
+
+### Upcoming features
+- Use external dataset for slugs (array of words)
+- Convert a sentence to slug (with options)
