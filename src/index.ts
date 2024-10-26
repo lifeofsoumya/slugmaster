@@ -52,7 +52,7 @@ const generateCouponCode = (options: GenerateCouponCodeOptions = {}): string => 
     return `${prefix}${couponCode}`;
 };
 
-const words = [
+const defaultWords = [
 "it", "is", "to", "on", "at",
 "sun", "sky", "mud", "run", "ant",
 "slug", "rain", "tree", "bark", "leaf",
@@ -104,6 +104,7 @@ const words = [
 interface GenerateSlugOptions {
     wordCount?: number;
     randomStringLength?: number;
+    wordSet?: string[];
 }
 const shuffleArray = <T>(array: T[]): T[] => {
     const shuffledArray = [...array];
@@ -115,8 +116,9 @@ const shuffleArray = <T>(array: T[]): T[] => {
 };
 
 const generateSlug = ( options: GenerateSlugOptions = {} ): string => {
-    const { wordCount = 3, randomStringLength = 0 } = options;
-    const shuffledWords = shuffleArray(words).slice(0, wordCount);
+    const { wordCount = 3, randomStringLength = 0, wordSet = defaultWords } = options;
+    const wordsToUse = wordSet.length > 0 ? wordSet : defaultWords;
+    const shuffledWords = shuffleArray(wordsToUse).slice(0, wordCount);
     let slug = shuffledWords.join('-');
 
     if (randomStringLength > 0) {
@@ -131,5 +133,38 @@ const generateSlug = ( options: GenerateSlugOptions = {} ): string => {
 
     return slug;
 };
+interface SlugifyOptions {
+    lowercase?: boolean;
+    trim?: boolean;
+    replaceSpaces?: boolean;
+    removeNonWordChars?: boolean;
+    replaceMultipleDashes?: boolean;
+    trimDashes?: boolean;
+}
 
-export { generateCouponCode, generateSlug };
+const slugify = (text: string, options: SlugifyOptions = {}): string => {
+    const {
+        lowercase = true,
+        trim = true,
+        replaceSpaces = true,
+        removeNonWordChars = true,
+        replaceMultipleDashes = true,
+        trimDashes = true
+    } = options;
+
+    let slug = text.toString();
+
+    if (lowercase) slug = slug.toLowerCase();
+    if (trim) slug = slug.trim();
+    if (replaceSpaces) slug = slug.replace(/\s+/g, '-'); // Replace spaces with -
+    if (removeNonWordChars) slug = slug.replace(/[^\w\-]+/g, ''); // Remove all non-word chars
+    if (replaceMultipleDashes) slug = slug.replace(/\-\-+/g, '-'); // Replace multiple - with single -
+    if (trimDashes) {
+        slug = slug.replace(/^-+/, ''); // Trim - from start of text
+        slug = slug.replace(/-+$/, ''); // Trim - from end of text
+    }
+
+    return slug;
+};
+
+export { generateCouponCode, generateSlug, slugify };

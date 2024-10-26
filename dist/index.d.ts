@@ -10,6 +10,16 @@ declare const generateCouponCode: (options?: GenerateCouponCodeOptions) => strin
 interface GenerateSlugOptions {
     wordCount?: number;
     randomStringLength?: number;
+    wordSet?: string[];
 }
 declare const generateSlug: (options?: GenerateSlugOptions) => string;
-export { generateCouponCode, generateSlug };
+interface SlugifyOptions {
+    lowercase?: boolean;
+    trim?: boolean;
+    replaceSpaces?: boolean;
+    removeNonWordChars?: boolean;
+    replaceMultipleDashes?: boolean;
+    trimDashes?: boolean;
+}
+declare const slugify: (text: string, options?: SlugifyOptions) => string;
+export { generateCouponCode, generateSlug, slugify };
